@@ -43,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
         >
             <div>
                 {product.badge && (
-                    <span className=' rounded-full bg-[#3D2E9E] px-2.5 py-1 text-[10px] font-semibold text-white'>
+                    <span className=' rounded-full bg-[#4E2FD2] px-2.5 py-1 text-[12px] font-semibold text-white'>
                         {product.badge}
                     </span>
                 )}
