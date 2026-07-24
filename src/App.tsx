@@ -1,12 +1,12 @@
- import './App.css'
+import './App.css'
+import React from 'react'
+import MainLayout from './components/MainLayout'
 
-function App() { 
+function App() {
 
   return (
     <>
-       <div className="text-3xl font-bold underline">
-         Hello, Vite + React!
-       </div>
+      <MainLayout />
     </>
   )
 }
