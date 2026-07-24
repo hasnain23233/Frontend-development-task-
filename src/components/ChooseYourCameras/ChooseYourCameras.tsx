@@ -1,26 +1,20 @@
 import React, { useId, useState } from 'react'
-import productData from '../../data/product.json'
-import type { ProductsData } from '../../types/product.types'
 import { useProductSelection } from '../../hooks/useProductSelection'
 import ProductCard from './ProductCard'
-
-// Cast once at module scope — the JSON shape is trusted/static here.
-// If this data ever comes from an API instead, swap this for a fetch
-// + runtime validation (e.g. zod) at the call site.
-const { products } = productData as ProductsData
+import { useBundle } from "./../../context/useBundle";
+ 
 
 const ChooseYourCameras: React.FC = () => {
+    
+    const { products } = useBundle()
     const { selection, selectColor, increment, decrement } =
         useProductSelection(products)
-
-    // Controls whether the camera grid is expanded or collapsed.
-    // Defaults to open so the step behaves the same as before this
-    // toggle was added.
+ 
     const [isOpen, setIsOpen] = useState(true)
     const panelId = useId()
 
     return (
-        <div className={`w-full rounded-xl ${isOpen ? 'grid-rows-[1fr] bg-[#EDF4FF]' : 'grid-rows-[0fr] bg-white'}`}>
+        <div className={`w-full rounded-xl ${isOpen ? 'bg-[#EDF4FF]' : 'bg-white'}`}>
             <h1 className='border-b border-gray-400 p-2  text-sm font-semibold text-[#484848]'>
                 Step 1 of 4
             </h1>
