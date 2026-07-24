@@ -6,9 +6,8 @@ import { useBundle } from "./../../context/useBundle";
 
 const ChooseYourCameras: React.FC = () => {
     
-    const { products } = useBundle()
-    const { selection, selectColor, increment, decrement } =
-        useProductSelection(products)
+    const { products, selection, selectColor, increment, decrement, totalQuantity, subtotal } = useBundle()
+     
  
     const [isOpen, setIsOpen] = useState(true)
     const panelId = useId()

@@ -3,6 +3,7 @@
  * Kept separate from components so they can be reused by API layers,
  * hooks, and tests without pulling in any React code.
  */
+export type ProductCategory = 'camera' | 'sensor' | 'accessory'
 
 export interface ProductColor {
   id: string
@@ -30,6 +31,8 @@ export interface Product {
   defaultColorId: string | null
   defaultQuantity: number
   pricing: ProductPricing
+  category: ProductCategory      
+  isRequired?: boolean  
 }
 
 export interface ProductsData {
