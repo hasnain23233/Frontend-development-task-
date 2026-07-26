@@ -1,3 +1,41 @@
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #111827;
+  background-color: #f8fafc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-gilroy {
+  font-family: 'Gilroy-Bold', 'Gilroy', 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.font-gilroy-medium {
+  font-family: 'Gilroy-Medium', 'Gilroy', 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}

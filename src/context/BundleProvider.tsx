@@ -1,32 +1,57 @@
-import type { ReactNode } from "react";
-import { BundleContext, type BundleContextType } from "./BundleContext";
-import productData from "./../data/product.json";
-import type { ProductsData } from "./../types/product.types";
-import { useProductSelection } from "./../hooks/useProductSelection";
+import type { ReactNode } from 'react'
+import { BundleContext, type BundleContextType } from './BundleContext'
+import productData from './../data/product.json'
+import type { BundleData } from './../types/product.types'
+import { useProductSelection } from './../hooks/useProductSelection'
 
 interface BundleProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 export const BundleProvider = ({ children }: BundleProviderProps) => {
-  const { products } = productData as ProductsData;
-  const { selection, selectColor, increment, decrement, totalQuantity, subtotal } =
-    useProductSelection(products);
-
-  const data: BundleContextType = {
-    name: "John Doe",
-    products,
+  const { products, plans } = productData as BundleData
+  const {
     selection,
-    selectColor,
+    activeVariantByProduct,
+    setActiveVariant,
     increment,
     decrement,
-    totalQuantity,
+    selectedPlanId,
+    selectPlan,
+    saveBundle,
+    saved,
+    selectedLineItems,
+    selectedCounts,
     subtotal,
-    plan: { name: "Cam Unlimited", originalPrice: 12.99, salePrice: 9.99 },
-  shippingCost: 5.99,
-  };
+    selectedPlan,
+    shippingCost,
+    total,
+    originalTotal,
+    savings,
+  } = useProductSelection(products, plans)
 
-  return (
-    <BundleContext.Provider value={data}>{children}</BundleContext.Provider>
-  );
-};
+  const data: BundleContextType = {
+    name: 'John Doe',
+    products,
+    plans,
+    selectedPlanId,
+    selection,
+    activeVariantByProduct,
+    setActiveVariant,
+    increment,
+    decrement,
+    selectPlan,
+    saveBundle,
+    saved,
+    selectedLineItems,
+    selectedCounts,
+    subtotal,
+    selectedPlan,
+    shippingCost,
+    total,
+    originalTotal,
+    savings,
+  }
+
+  return <BundleContext.Provider value={data}>{children}</BundleContext.Provider>
+}

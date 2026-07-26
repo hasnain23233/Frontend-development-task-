@@ -1,122 +1,228 @@
-import React, { useId, useState } from 'react'
-import { useProductSelection } from '../../hooks/useProductSelection'
+﻿import { useState } from 'react'
+import {
+  ArrowRight,
+  Camera,
+  ChevronDown,
+  ChevronUp,
+  CreditCard,
+  Package,
+  ShieldCheck,
+} from 'lucide-react'
 import ProductCard from './ProductCard'
-import { useBundle } from "./../../context/useBundle";
- 
+import { useBundle } from './../../context/useBundle'
+import { formatCurrency } from '../../utils/formatCurrency'
+import type { ProductCategory } from '../../types/product.types'
 
-const ChooseYourCameras: React.FC = () => {
-    
-    const { products, selection, selectColor, increment, decrement, totalQuantity, subtotal } = useBundle()
-     
- 
-    const [isOpen, setIsOpen] = useState(true)
-    const panelId = useId()
+interface WizardStep {
+  id: string
+  title: string
+  description: string
+  Icon: typeof Camera
+  category?: ProductCategory
+}
 
-    return (
-        <div className={`w-full rounded-xl ${isOpen ? 'bg-[#EDF4FF]' : 'bg-white'}`}>
-            <h1 className='border-b border-gray-400 p-2  text-sm font-semibold text-[#484848]'>
-                Step 1 of 4
-            </h1>
+interface VariantProduct {
+  id: string
+  colors: { id: string }[]
+  defaultColorId: string | null
+}
 
-            <div className='flex flex-col items-center justify-center gap-4 p-4 flex-wrap sm:flex-row sm:justify-between sm:items-center'>
-                <h1 className='text-xl  font-semibold text-[#484848] flex items-center gap-2'>
-                    <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clipPath="url(#clip0_68_9780)">
-                            <path d="M8.6665 24.9166V20.5833" stroke="#6F7882" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M17.3335 24.9166V20.5833" stroke="#6F7882" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M22.75 24.9167L3.25 24.9167" stroke="#6F7882" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M13 5.14581C15.2436 5.14581 17.0625 6.96473 17.0625 9.20831C17.0625 11.4519 15.2436 13.2708 13 13.2708C10.7564 13.2708 8.9375 11.4519 8.9375 9.20831C8.9375 6.96473 10.7564 5.14581 13 5.14581Z" stroke="#6F7882" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M12.9731 16.25C12.7489 16.25 12.5669 16.432 12.5669 16.6562C12.5669 16.8805 12.7489 17.0625 12.9731 17.0625C13.1974 17.0625 13.3794 16.8805 13.3794 16.6562C13.3794 16.432 13.1974 16.25 12.9731 16.25Z" fill="#6F7882" stroke="#6F7882" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            <rect x="3.1875" y="0.75" width="19.625" height="19.625" rx="3.25" stroke="#6F7882" strokeWidth="1.5" />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_68_9780">
-                                <rect width="26" height="26" fill="white" />
-                            </clipPath>
-                        </defs>
-                    </svg>
+const WIZARD_STEPS: WizardStep[] = [
+  {
+    id: 'cameras',
+    title: 'Choose your cameras',
+    description: 'Select the right cameras to protect every angle of your home.',
+    Icon: Camera,
+    category: 'camera',
+  },
+  {
+    id: 'plan',
+    title: 'Choose your plan',
+    description: 'Pick the plan that best fits your home and monitoring needs.',
+    Icon: CreditCard,
+  },
+  {
+    id: 'sensors',
+    title: 'Choose your sensors',
+    description: 'Add door, window, and motion sensors for smarter alerts.',
+    Icon: ShieldCheck,
+    category: 'sensor',
+  },
+  {
+    id: 'extras',
+    title: 'Add extra protection',
+    description: 'Complete your system with accessories for extra safety.',
+    Icon: Package,
+    category: 'accessory',
+  },
+]
 
-                    Choose your cameras
-                </h1>
+const STEP_ORDER = WIZARD_STEPS.map((step) => step.id)
 
-                <button
-                    type='button'
-                    onClick={() => setIsOpen((prev) => !prev)}
-                    aria-expanded={isOpen}
-                    aria-controls={panelId}
-                    className='flex items-center gap-2 rounded-md px-1 py-0.5 text-sm text-[#484848]
-            transition-colors hover:bg-black/5
-            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6C4EF7]'
-                >
-                    <span>Select</span>
-                    <svg
-                        width='12'
-                        height='12'
-                        viewBox='0 0 12 12'
-                        fill='none'
-                        xmlns='http://www.w3.org/2000/svg'
-                        className={`transition-transform duration-300 ease-in-out ${isOpen ? 'rotate-180' : 'rotate-0'
-                            }`}
-                        aria-hidden='true'
-                    >
-                        <path
-                            d='M5.59318 2.56961C5.79259 2.29044 6.2075 2.29044 6.40691 2.56962L10.4353 8.20938C10.6717 8.54032 10.4351 9 10.0284 9H1.9716C1.56491 9 1.32835 8.54031 1.56473 8.20938L5.59318 2.56961Z'
-                            fill='#4E2FD2'
-                        />
-                    </svg>
-                </button>
-            </div>
+const getDefaultVariantId = (product: VariantProduct) =>
+  product.defaultColorId ?? product.colors[0]?.id ?? 'default'
 
-            {/*
-        Smooth expand/collapse using the `grid-template-rows: 0fr -> 1fr`
-        technique. Animating `height: auto` directly isn't possible in
-        CSS, and `max-height` hacks either jank or clip content — this
-        approach animates cleanly to the panel's real height with no JS
-        measuring and no ResizeObserver.
+const ChooseYourCameras = () => {
+  const [openStepId, setOpenStepId] = useState<string | null>(WIZARD_STEPS[0].id)
 
-        `background-color` transitions on the same node, in the same
-        duration, so the panel fades to white as it opens and fades
-        back to the card's original blue as it closes — driven purely
-        by `isOpen`, no extra state.
-      */}
-            <div
-                id={panelId}
-                className={`grid rounded-b-xl transition-[grid-template-rows,background-color] duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] ' : 'grid-rows-[0fr] '
-                    }`}
-            >
-                <div className='overflow-hidden'>
-                    {/* Auto-centers a trailing odd item so the grid works for any
-             product count, not just 5 — no layout is hardcoded per index. */}
-                    <div className='grid grid-cols-1 gap-4 px-4 pb-4 sm:grid-cols-2'>
-                        {products.map((product, index) => {
-                            const isTrailingOdd =
-                                products.length % 2 === 1 && index === products.length - 1
+  const {
+    products,
+    plans,
+    selectedPlanId,
+    selectPlan,
+    selection,
+    activeVariantByProduct,
+    setActiveVariant,
+    increment,
+    decrement,
+    selectedCounts,
+  } = useBundle()
 
-                            const card = (
-                                <ProductCard
-                                    key={product.id}
-                                    product={product}
-                                    selectedColorId={selection[product.id]?.colorId ?? null}
-                                    quantity={selection[product.id]?.quantity ?? 0}
-                                    onSelectColor={selectColor}
-                                    onIncrement={increment}
-                                    onDecrement={decrement}
-                                />
-                            )
+  const getProductsForCategory = (category: ProductCategory) =>
+    products.filter((product) => product.category === category)
 
-                            if (!isTrailingOdd) return card
+  const getSelectedCountForStep = (step: WizardStep) =>
+    step.id === 'plan' ? selectedCounts.plan : selectedCounts[step.category ?? 'camera']
 
-                            return (
-                                <div key={product.id} className='sm:col-span-2 sm:flex sm:justify-center'>
-                                    <div className='w-full sm:w-1/2 sm:pr-2'>{card}</div>
-                                </div>
-                            )
-                        })}
-                    </div>
+  const goToStep = (stepId: string) =>
+    setOpenStepId((currentStepId) => (currentStepId === stepId ? null : stepId))
+
+  const goToNextStep = (currentIndex: number) => setOpenStepId(STEP_ORDER[currentIndex + 1])
+
+  const renderPlanOptions = () => (
+    <div className='mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2'>
+      {plans.map((plan) => {
+        const isSelected = plan.id === selectedPlanId
+
+        return (
+          <button
+            key={plan.id}
+            type='button'
+            onClick={() => selectPlan(plan.id)}
+            className={`w-full rounded-3xl border p-4 text-left transition sm:p-5 ${
+              isSelected
+                ? 'border-[#4E2FD2] bg-[#EEF4FF] shadow-sm'
+                : 'border-gray-200 bg-white hover:border-slate-300'
+            }`}
+          >
+            <div className='flex flex-col justify-between gap-3 sm:flex-row sm:items-start sm:gap-4'>
+              <div>
+                <div className='flex flex-wrap items-center gap-2'>
+                  <h3 className='text-base font-semibold text-slate-900 sm:text-lg'>{plan.name}</h3>
+                  {plan.badge ? (
+                    <span className='rounded-full bg-[#E7ECFF] px-2.5 py-1 text-[11px] font-semibold text-[#3C4BDC]'>
+                      {plan.badge}
+                    </span>
+                  ) : null}
                 </div>
+                <p className='mt-2 text-sm text-slate-500'>{plan.description}</p>
+              </div>
+              <div className='text-left sm:text-right'>
+                {plan.originalPrice !== null && (
+                  <p className='text-xs text-slate-400 line-through'>
+                    {formatCurrency(plan.originalPrice)}/mo
+                  </p>
+                )}
+                <p className='mt-1 text-lg font-semibold text-slate-900 sm:text-xl'>
+                  {formatCurrency(plan.salePrice)}/mo
+                </p>
+              </div>
             </div>
-        </div>
-    )
+          </button>
+        )
+      })}
+    </div>
+  )
+
+  const renderProductOptions = (category: ProductCategory) => (
+    <div className='mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2'>
+      {getProductsForCategory(category).map((product) => {
+        const activeVariantId = activeVariantByProduct[product.id] ?? getDefaultVariantId(product)
+        const quantity = selection[product.id]?.quantities?.[activeVariantId] ?? 0
+        const hasAnyQuantity = Object.values(selection[product.id]?.quantities ?? {}).some(
+          (qty) => qty > 0,
+        )
+
+        return (
+          <ProductCard
+            key={product.id}
+            product={product}
+            selectedColorId={activeVariantId}
+            quantity={quantity}
+            isSelected={hasAnyQuantity}
+            onSelectColor={setActiveVariant}
+            onIncrement={() => increment(product.id, activeVariantId)}
+            onDecrement={() => decrement(product.id, activeVariantId)}
+          />
+        )
+      })}
+    </div>
+  )
+
+  return (
+    <div className='w-full rounded-3xl shadow-sm'>
+      {WIZARD_STEPS.map((step, index) => {
+        const isOpen = step.id === openStepId
+        const selectedCount = getSelectedCountForStep(step)
+        const StepIcon = step.Icon
+        const isLastStep = index === WIZARD_STEPS.length - 1
+
+        return (
+          <div
+            key={step.id}
+            className={`rounded-3xl transition-colors ${isOpen ? 'bg-[#F8FBFF]' : 'bg-white'}`}
+          >
+            <p className='px-4 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-slate-400 sm:px-5 sm:py-4'>
+              Step {index + 1} of {WIZARD_STEPS.length}
+            </p>
+            <button
+              type='button'
+              onClick={() => goToStep(step.id)}
+              className='flex w-full items-center justify-between gap-3 border-y border-gray-900 px-4 py-3 text-left transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4E2FD2] sm:gap-4 sm:px-5 sm:py-4'
+            >
+              <div className='flex items-center gap-2 sm:gap-3'>
+                <span className='inline-flex h-9 w-9 items-center justify-center text-slate-700 sm:h-11 sm:w-11'>
+                  <StepIcon className='h-5 w-5 sm:h-6 sm:w-6 lg:h-7 lg:w-7' />
+                </span>
+                <div>
+                  <h2 className='mt-1 font-gilroy text-base text-slate-900 sm:text-xl lg:text-2xl'>
+                    {step.title}
+                  </h2>
+                </div>
+              </div>
+              <div className='flex items-center gap-2 text-xs font-semibold text-slate-500 sm:text-sm'>
+                <span>{selectedCount} selected</span>
+                {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              </div>
+            </button>
+
+            {isOpen && (
+              <div className='border-t border-gray-200 bg-[#F8FBFF] px-4 py-4 sm:px-5 sm:py-5'>
+                <p className='font-gilroy-medium max-w-2xl text-sm leading-6 text-slate-600'>
+                  {step.description}
+                </p>
+
+                {step.id === 'plan' ? renderPlanOptions() : renderProductOptions(step.category!)}
+
+                {!isLastStep && (
+                  <div className='mt-6 flex justify-end'>
+                    <button
+                      type='button'
+                      onClick={() => goToNextStep(index)}
+                      className='inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#4E2FD2] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#3b29b2] sm:w-auto sm:justify-start'
+                    >
+                      Next: {WIZARD_STEPS[index + 1].title}
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 
 export default ChooseYourCameras

@@ -1,4 +1,30 @@
-{
+﻿{
+  "plans": [
+    {
+      "id": "cam-unlimited",
+      "name": "Cam Unlimited",
+      "description": "Unlimited recordings, fast support, and peace of mind.",
+      "badge": "Best value",
+      "originalPrice": 12.99,
+      "salePrice": 9.99
+    },
+    {
+      "id": "cam-essential",
+      "name": "Cam Essential",
+      "description": "Cloud storage for 14 days and intelligent alerts.",
+      "badge": null,
+      "originalPrice": 9.99,
+      "salePrice": 7.99
+    },
+    {
+      "id": "cam-premier",
+      "name": "Cam Premier",
+      "description": "Advanced features for home monitoring pros.",
+      "badge": null,
+      "originalPrice": 18.99,
+      "salePrice": 14.99
+    }
+  ],
   "products": [
     {
       "id": "wyze-cam-v4",
@@ -6,7 +32,7 @@
       "badge": "Save 22%",
       "description": "The clearest Wyze Cam ever made.",
       "learnMoreUrl": "https://wyze.com/products/wyze-cam-v4",
-      "image": "/src/assets/camera1.png",
+      "image": "/assets/camera1.png",
       "colors": [
         { "id": "white", "name": "White", "swatchColor": "#F5F5F5" },
         { "id": "grey", "name": "Grey", "swatchColor": "#8A8A8A" },
@@ -17,7 +43,8 @@
       "pricing": {
         "original": 35.98,
         "sale": 27.98
-      }
+      },
+      "category": "camera"
     },
     {
       "id": "wyze-cam-pan-v3",
@@ -25,7 +52,7 @@
       "badge": "Save 12%",
       "description": "360° pan and 180° tilt security camera.",
       "learnMoreUrl": "https://wyze.com/products/wyze-cam-pan-v3",
-      "image": "src\\assets\\camera2.png",
+      "image": "/assets/camera2.png",
       "colors": [
         { "id": "white", "name": "White", "swatchColor": "#F5F5F5" },
         { "id": "black", "name": "Black", "swatchColor": "#1C1C1C" }
@@ -35,7 +62,8 @@
       "pricing": {
         "original": 39.98,
         "sale": 34.98
-      }
+      },
+      "category": "camera"
     },
     {
       "id": "wyze-cam-floodlight-v2",
@@ -43,7 +71,7 @@
       "badge": "Save 22%",
       "description": "2K floodlight camera with a 160° wide-angle view for your garage.",
       "learnMoreUrl": "https://wyze.com/products/wyze-cam-floodlight-v2",
-      "image": "src\\assets\\camera3.png",
+      "image": "/assets/camera3.png",
       "colors": [
         { "id": "white", "name": "White", "swatchColor": "#F5F5F5" },
         { "id": "black", "name": "Black", "swatchColor": "#1C1C1C" }
@@ -53,7 +81,40 @@
       "pricing": {
         "original": 89.98,
         "sale": 69.98
-      }
+      },
+      "category": "camera"
+    },
+    {
+      "id": "wyze-sense-door-window-sensor",
+      "name": "Wyze Sense Door/Window Sensor",
+      "badge": null,
+      "description": "Smart door/window protection for every entry point.",
+      "learnMoreUrl": "https://wyze.com/products/wyze-sense-door-window-sensor",
+      "image": "/assets/camera4.png",
+      "colors": [],
+      "defaultColorId": null,
+      "defaultQuantity": 1,
+      "pricing": {
+        "original": 14.99,
+        "sale": 12.99
+      },
+      "category": "sensor"
+    },
+    {
+      "id": "wyze-motion-sensor",
+      "name": "Wyze Motion Sensor",
+      "badge": null,
+      "description": "Detect motion across rooms and alert your phone instantly.",
+      "learnMoreUrl": "https://wyze.com/products/wyze-motion-sensor",
+      "image": "/assets/camera5.png",
+      "colors": [],
+      "defaultColorId": null,
+      "defaultQuantity": 0,
+      "pricing": {
+        "original": 24.99,
+        "sale": 19.99
+      },
+      "category": "sensor"
     },
     {
       "id": "wyze-duo-cam-doorbell",
@@ -61,14 +122,15 @@
       "badge": null,
       "description": "Two cameras. Two views. Double the porch protection.",
       "learnMoreUrl": "https://wyze.com/products/wyze-duo-cam-doorbell",
-      "image": "src/assets/camera4.png",
+      "image": "/assets/camera4.png",
       "colors": [],
       "defaultColorId": null,
-      "defaultQuantity": 0,
+      "defaultQuantity": 1,
       "pricing": {
         "original": null,
         "sale": 69.98
-      }
+      },
+      "category": "accessory"
     },
     {
       "id": "wyze-battery-cam-pro",
@@ -76,17 +138,18 @@
       "badge": null,
       "description": "Protect anywhere. See everything in 2.5K HDR. No power outlet or electrician needed.",
       "learnMoreUrl": "https://wyze.com/products/wyze-battery-cam-pro",
-      "image": "src/assets/camera5.png",
+      "image": "/assets/camera5.png",
       "colors": [
         { "id": "white", "name": "White", "swatchColor": "#F5F5F5" },
         { "id": "black", "name": "Black", "swatchColor": "#1C1C1C" }
       ],
-      "defaultColorId": null,
+      "defaultColorId": "white",
       "defaultQuantity": 0,
       "pricing": {
         "original": null,
         "sale": 89.98
-      }
+      },
+      "category": "accessory"
     }
   ]
 }

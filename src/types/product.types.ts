@@ -31,18 +31,39 @@ export interface Product {
   defaultColorId: string | null
   defaultQuantity: number
   pricing: ProductPricing
-  category: ProductCategory      
-  isRequired?: boolean  
+  category: ProductCategory
+  isRequired?: boolean
 }
 
-export interface ProductsData {
+export interface PlanOption {
+  id: string
+  name: string
+  description: string
+  originalPrice: number | null
+  salePrice: number
+  badge: string | null
+}
+
+export interface BundleData {
   products: Product[]
+  plans: PlanOption[]
 }
 
-/** Per-product UI selection state, keyed by product id at the hook level */
-export interface ProductSelection {
-  colorId: string | null
+export interface ReviewLineItem {
+  id: string
+  productId: string
+  variantId: string
+  variantName: string | null
+  image: string
+  name: string
+  pricing: ProductPricing
   quantity: number
+  category: ProductCategory
+}
+
+export interface ProductSelection {
+  activeColorId: string | null
+  quantities: Record<string, number>
 }
 
 export type SelectionMap = Record<string, ProductSelection>

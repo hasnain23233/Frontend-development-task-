@@ -1,23 +1,24 @@
-import React from 'react'
 import ChooseYourCameras from './ChooseYourCameras/ChooseYourCameras.tsx'
 import ReviewPanel from './review/ReviewPanel'
 
 const MainLayout = () => {
-    return (
-        <>
-            <div className='flex flex-col justify-center items-center gap-4 w-full h-screen'>
-                <h1 className='text-3xl sm:hidden block text-red-500'>Let’s get started!</h1>
-                <div className='flex md:flex-row flex-row w-11/12 border-2 border-gray-200 rounded-xl gap-4 m-auto justify-between items-center gap-4'>
-                    <div className='flex flex-col justify-center items-center  w-8/12'>
-                        <ChooseYourCameras />
-                    </div>
-                    <div>
-                        <ReviewPanel />
-                    </div>
-                </div>
-            </div>
-        </>
-    )
+  return (
+    <div className='text-center'>
+      <h1 className='my-2 block text-2xl font-bold text-gray-900 sm:hidden sm:text-4xl'>
+        Let&rsquo;s get started!
+      </h1>
+
+      <div className='m-auto flex w-10/12 my-12  flex-col items-center justify-between gap-4 rounded-xl text-start md:flex-row md:items-start'>
+        <div className='flex w-full flex-col items-center justify-center md:w-7/12'>
+          <ChooseYourCameras />
+        </div>
+
+        <div className='w-full md:w-4/12'>
+          <ReviewPanel />
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default MainLayout
