@@ -10,6 +10,8 @@ export interface ProductColor {
   name: string
   /** Hex value used to render the swatch dot */
   swatchColor: string
+  /** Thumbnail shown in the color swatch button */
+  image: string
 }
 
 export interface ProductPricing {

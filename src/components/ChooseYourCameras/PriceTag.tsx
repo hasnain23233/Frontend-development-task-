@@ -12,11 +12,11 @@ const PriceTag: React.FC<PriceTagProps> = ({ pricing }) => {
   return (
     <div className='flex flex-col items-end leading-tight'>
       {original !== null && (
-        <span className='text-xs text-red-500 line-through'>
+        <span className='text-sm text-red-500 line-through'>
           {formatCurrency(original)}
         </span>
       )}
-      <span className='text-sm font-semibold text-[#484848]'>
+      <span className='text-lg font-semibold text-[#484848]'>
         {formatCurrency(sale)}
       </span>
     </div>

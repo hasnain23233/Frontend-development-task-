@@ -34,9 +34,9 @@
       "learnMoreUrl": "https://wyze.com/products/wyze-cam-v4",
       "image": "/assets/camera1.png",
       "colors": [
-        { "id": "white", "name": "White", "swatchColor": "#F5F5F5" },
-        { "id": "grey", "name": "Grey", "swatchColor": "#8A8A8A" },
-        { "id": "black", "name": "Black", "swatchColor": "#1C1C1C" }
+        { "id": "white", "name": "White", "swatchColor": "#F5F5F5", "image": "public/assets/colors/white.png" },
+        { "id": "grey", "name": "Grey", "swatchColor": "#8A8A8A", "image": "public/assets/colors/grey.png" },
+        { "id": "black", "name": "Black", "swatchColor": "#1C1C1C", "image": "public/assets/colors/black.png" }
       ],
       "defaultColorId": "white",
       "defaultQuantity": 1,
@@ -54,8 +54,8 @@
       "learnMoreUrl": "https://wyze.com/products/wyze-cam-pan-v3",
       "image": "/assets/camera2.png",
       "colors": [
-        { "id": "white", "name": "White", "swatchColor": "#F5F5F5" },
-        { "id": "black", "name": "Black", "swatchColor": "#1C1C1C" }
+        { "id": "white", "name": "White", "swatchColor": "#F5F5F5", "image": "public/assets/colors/white.png" },
+        { "id": "black", "name": "Black", "swatchColor": "#1C1C1C", "image": "public/assets/colors/black.png" }
       ],
       "defaultColorId": "white",
       "defaultQuantity": 2,
@@ -73,29 +73,13 @@
       "learnMoreUrl": "https://wyze.com/products/wyze-cam-floodlight-v2",
       "image": "/assets/camera3.png",
       "colors": [
-        { "id": "white", "name": "White", "swatchColor": "#F5F5F5" },
-        { "id": "black", "name": "Black", "swatchColor": "#1C1C1C" }
+        { "id": "white", "name": "White", "swatchColor": "#F5F5F5", "image": "public/assets/colors/white.png" },
+        { "id": "black", "name": "Black", "swatchColor": "#1C1C1C", "image": "public/assets/colors/black.png" }
       ],
       "defaultColorId": null,
       "defaultQuantity": 0,
       "pricing": {
         "original": 89.98,
-        "sale": 69.98
-      },
-      "category": "camera"
-    },
-    {
-      "id": "wyze-duo-cam-doorbell",
-      "name": "Wyze Duo Cam Doorbell",
-      "badge": null,
-      "description": "Two cameras. Two views. Double the porch protection.",
-      "learnMoreUrl": "https://wyze.com/products/wyze-duo-cam-doorbell",
-      "image": "/assets/camera4.png",
-      "colors": [],
-      "defaultColorId": null,
-      "defaultQuantity": 0,
-      "pricing": {
-        "original": null,
         "sale": 69.98
       },
       "category": "camera"
@@ -156,8 +140,8 @@
       "learnMoreUrl": "https://wyze.com/products/wyze-battery-cam-pro",
       "image": "/assets/camera5.png",
       "colors": [
-        { "id": "white", "name": "White", "swatchColor": "#F5F5F5" },
-        { "id": "black", "name": "Black", "swatchColor": "#1C1C1C" }
+        { "id": "white", "name": "White", "swatchColor": "#F5F5F5", "image": "public/assets/colors/white.png" },
+        { "id": "black", "name": "Black", "swatchColor": "#1C1C1C", "image": "public/assets/colors/black.png" }
       ],
       "defaultColorId": "white",
       "defaultQuantity": 0,
