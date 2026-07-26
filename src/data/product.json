@@ -85,6 +85,22 @@
       "category": "camera"
     },
     {
+      "id": "wyze-duo-cam-doorbell",
+      "name": "Wyze Duo Cam Doorbell",
+      "badge": null,
+      "description": "Two cameras. Two views. Double the porch protection.",
+      "learnMoreUrl": "https://wyze.com/products/wyze-duo-cam-doorbell",
+      "image": "/assets/camera4.png",
+      "colors": [],
+      "defaultColorId": null,
+      "defaultQuantity": 0,
+      "pricing": {
+        "original": null,
+        "sale": 69.98
+      },
+      "category": "camera"
+    },
+    {
       "id": "wyze-sense-door-window-sensor",
       "name": "Wyze Sense Door/Window Sensor",
       "badge": null,

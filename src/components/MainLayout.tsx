@@ -1,4 +1,4 @@
-import ChooseYourCameras from './ChooseYourCameras/ChooseYourCameras.tsx'
+import BundleConfigurator from './ChooseYourCameras/BundleConfigurator.tsx'
 import ReviewPanel from './review/ReviewPanel'
 
 const MainLayout = () => {
@@ -10,7 +10,7 @@ const MainLayout = () => {
 
       <div className='m-auto flex w-10/12 my-12  flex-col items-center justify-between gap-4 rounded-xl text-start md:flex-row md:items-start'>
         <div className='flex w-full flex-col items-center justify-center md:w-7/12'>
-          <ChooseYourCameras />
+          <BundleConfigurator />
         </div>
 
         <div className='w-full md:w-4/12'>

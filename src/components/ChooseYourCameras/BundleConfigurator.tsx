@@ -9,7 +9,7 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import ProductCard from './ProductCard'
-import { useBundle } from './../../context/useBundle'
+import { useBundle } from '../../context/useBundle'
 import { formatCurrency } from '../../utils/formatCurrency'
 import type { ProductCategory } from '../../types/product.types'
 
@@ -62,7 +62,7 @@ const STEP_ORDER = WIZARD_STEPS.map((step) => step.id)
 const getDefaultVariantId = (product: VariantProduct) =>
   product.defaultColorId ?? product.colors[0]?.id ?? 'default'
 
-const ChooseYourCameras = () => {
+const BundleConfigurator = () => {
   const [openStepId, setOpenStepId] = useState<string | null>(WIZARD_STEPS[0].id)
 
   const {
@@ -225,4 +225,4 @@ const ChooseYourCameras = () => {
   )
 }
 
-export default ChooseYourCameras
+export default BundleConfigurator
