@@ -38,7 +38,7 @@ const ReviewLineItem: React.FC<ReviewLineItemProps> = ({ item, onIncrement, onDe
   const displayName = item.variantName ? `${item.name} — ${item.variantName}` : item.name
 
   return (
-    <li className='flex  items-center justify-between gap-3 rounded-2xl bg-transparent p-2 shadow-sm sm:p-3'>
+    <li className='flex  items-center justify-between gap-3 rounded-2xl bg-transparent p-2 shadow-sm sm:p-2'>
       <div className='flex items-center gap-3'>
         <img
           src={item.image}
@@ -118,7 +118,7 @@ const ReviewPanel = () => {
               <p className='text-xs font-semibold tracking-wide text-gray-400'>
                 {CATEGORY_LABELS[category].toUpperCase()}
               </p>
-              <ul className='mt-2 flex flex-col gap-3'>
+              <ul className='flex flex-col'>
                 {items.map((item) => (
                   <ReviewLineItem
                     key={item.id}
