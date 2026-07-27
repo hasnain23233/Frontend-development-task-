@@ -32,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div
-      className={`relative flex gap-3 rounded-xl border-2 bg-white p-3 transition-colors sm:gap-4 sm:p-4
+      className={`relative flex xl:flex-row sm:flex-col flex-row gap-3 rounded-xl border-2 bg-white p-3 transition-colors sm:gap-4 sm:p-4
         ${isSelected ? 'border-[#6C4EF7]' : 'border-transparent'}`}
     >
       <div>
@@ -52,8 +52,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
       <div className='flex min-w-0 flex-1 flex-col gap-2'>
         <div>
-          <h3 className='text-base font-semibold text-[#1F1F1F] sm:text-xl'>{product.name}</h3>
-          <p className='mt-0.5 text-sm text-[#6B6B6B] sm:text-base'>
+          <h3 className='text-base font-semibold text-[#1F1F1F] xl:text-xl'>{product.name}</h3>
+          <p className='mt-0.5 xl:text-base sm:text-xs text-[#6B6B6B] text-sm'>
             {product.description}{' '}
             <a
               href={product.learnMoreUrl}

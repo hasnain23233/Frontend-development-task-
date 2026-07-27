@@ -66,6 +66,25 @@
       "category": "camera"
     },
     {
+  "id": "wyze-cam-og",
+  "name": "Wyze Cam OG",
+  "badge": "New",
+  "description": "1080p indoor/outdoor cam with color night vision and a wide 130° field of view.",
+  "learnMoreUrl": "https://wyze.com/products/wyze-cam-og",
+  "image": "/assets/camera5.png",
+  "colors": [
+    { "id": "white", "name": "White", "swatchColor": "#F5F5F5", "image": "public/assets/colors/white.png" },
+    { "id": "black", "name": "Black", "swatchColor": "#1C1C1C", "image": "public/assets/colors/black.png" }
+  ],
+  "defaultColorId": "white",
+  "defaultQuantity": 1,
+  "pricing": {
+    "original": 35.98,
+    "sale": 25.98
+  },
+  "category": "camera"
+},
+    {
       "id": "wyze-cam-floodlight-v2",
       "name": "Wyze Cam Floodlight v2",
       "badge": "Save 22%",

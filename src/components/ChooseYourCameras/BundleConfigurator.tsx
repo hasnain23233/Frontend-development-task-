@@ -90,7 +90,7 @@ const BundleConfigurator = () => {
   const goToNextStep = (currentIndex: number) => setOpenStepId(STEP_ORDER[currentIndex + 1])
 
   const renderPlanOptions = () => (
-    <div className='mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2'>
+    <div className='mt-5 grid grid-cols-1 gap-4 xl:grid-cols-2  sm:grid-cols-3'>
       {plans.map((plan) => {
         const isSelected = plan.id === selectedPlanId
 
@@ -135,7 +135,7 @@ const BundleConfigurator = () => {
   )
 
   const renderProductOptions = (category: ProductCategory) => (
-    <div className='mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2'>
+    <div className='mt-5 grid grid-cols-1 gap-4 xl:grid-cols-2 sm:grid-cols-4'>
       {getProductsForCategory(category).map((product) => {
         const activeVariantId = activeVariantByProduct[product.id] ?? getDefaultVariantId(product)
         const quantity = selection[product.id]?.quantities?.[activeVariantId] ?? 0
@@ -205,7 +205,7 @@ const BundleConfigurator = () => {
                 {step.id === 'plan' ? renderPlanOptions() : renderProductOptions(step.category!)}
 
                 {!isLastStep && (
-                  <div className='mt-6 flex justify-end'>
+                  <div className='mt-6 flex justify-center'>
                     <button
                       type='button'
                       onClick={() => goToNextStep(index)}
