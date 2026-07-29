@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import type { ReactNode } from 'react'
 import { BundleContext, type BundleContextType } from './BundleContext'
 import productData from './../data/product.json'
@@ -7,6 +8,8 @@ import { useProductSelection } from './../hooks/useProductSelection'
 interface BundleProviderProps {
   children: ReactNode
 }
+
+const STORAGE_KEY = 'bundleState'
 
 export const BundleProvider = ({ children }: BundleProviderProps) => {
   const { products, plans } = productData as BundleData
@@ -29,6 +32,20 @@ export const BundleProvider = ({ children }: BundleProviderProps) => {
     originalTotal,
     savings,
   } = useProductSelection(products, plans)
+
+  // Auto-persist to localStorage whenever the relevant selection state changes
+  useEffect(() => {
+    const stateToSave = {
+      selection,
+      activeVariantByProduct,
+      selectedPlanId,
+    }
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stateToSave))
+    } catch (err) {
+      console.error('Failed to save bundle state to localStorage:', err)
+    }
+  }, [selection, activeVariantByProduct, selectedPlanId])
 
   const data: BundleContextType = {
     name: 'John Doe',

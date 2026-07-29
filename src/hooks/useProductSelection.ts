@@ -90,6 +90,29 @@ const loadSavedState = (
   }
 }
 
+// Writes the current selection/plan to localStorage. Shared by the
+// auto-save effect and the explicit "Save my system for later" action.
+const persistState = (selectedPlanId: string, selection: SelectionMap) => {
+  if (typeof window === 'undefined') return
+  const state: StoredBundleState = {
+    selectedPlanId,
+    selection: Object.fromEntries(
+      Object.entries(selection).map(([productId, selectionEntry]) => [
+        productId,
+        {
+          activeColorId: selectionEntry.activeColorId,
+          quantities: selectionEntry.quantities,
+        },
+      ])
+    ),
+  }
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+  } catch (err) {
+    console.error('Failed to save bundle state to localStorage:', err)
+  }
+}
+
 export const useProductSelection = (products: Product[], plans: PlanOption[]) => {
   const { selectedPlanId: initialPlanId, selection: initialSelection, saved: initialSaved } =
     loadSavedState(products, plans)
@@ -97,6 +120,20 @@ export const useProductSelection = (products: Product[], plans: PlanOption[]) =>
   const [selection, setSelection] = useState<SelectionMap>(initialSelection)
   const [selectedPlanId, setSelectedPlanId] = useState<string>(initialPlanId)
   const [saved, setSaved] = useState<boolean>(initialSaved)
+
+  // Auto-save: any time a product is clicked (quantity change, variant
+  // switch, or plan pick), persist the bundle to localStorage immediately.
+  // Skips the very first render so we don't rewrite the same state we
+  // just read from localStorage.
+  const [hasMounted, setHasMounted] = useState(false)
+  useEffect(() => {
+    if (!hasMounted) {
+      setHasMounted(true)
+      return
+    }
+    persistState(selectedPlanId, selection)
+    setSaved(true)
+  }, [selection, selectedPlanId, hasMounted])
 
   useEffect(() => {
     const handleStorage = () => {
@@ -113,20 +150,11 @@ export const useProductSelection = (products: Product[], plans: PlanOption[]) =>
     return () => window.removeEventListener('storage', handleStorage)
   }, [plans, products])
 
+  // Kept for the explicit "Save my system for later" link/button —
+  // useful as a deliberate confirmation moment even though changes
+  // are already auto-saved as they happen.
   const saveBundle = useCallback(() => {
-    const state: StoredBundleState = {
-      selectedPlanId,
-      selection: Object.fromEntries(
-        Object.entries(selection).map(([productId, selectionEntry]) => [
-          productId,
-          {
-            activeColorId: selectionEntry.activeColorId,
-            quantities: selectionEntry.quantities,
-          },
-        ])
-      ),
-    }
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+    persistState(selectedPlanId, selection)
     setSaved(true)
   }, [selectedPlanId, selection])
 
