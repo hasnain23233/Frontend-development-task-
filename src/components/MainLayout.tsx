@@ -1,4 +1,4 @@
-import BundleConfigurator from './ChooseYourCameras/BundleConfigurator.tsx'
+import BundleConfigurator from './setps/BundleConfigurator.tsx'
 import ReviewPanel from './review/ReviewPanel'
 
 const MainLayout = () => {
