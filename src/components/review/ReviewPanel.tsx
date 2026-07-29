@@ -1,5 +1,4 @@
-﻿import { ShieldCheck } from 'lucide-react'
-import { useBundle } from './../../context/useBundle'
+﻿import { useBundle } from './../../context/useBundle'
 import { formatCurrency } from './../../utils/formatCurrency'
 import type { ProductCategory } from './../../types/product.types'
 
