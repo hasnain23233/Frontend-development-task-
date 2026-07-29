@@ -1,4 +1,6 @@
 # Frontend Take-Home: Bundle Builder
+<img width="1643" height="824" alt="image" src="https://github.com/user-attachments/assets/03160a12-d1f5-457b-bba0-4499a845ef51" />
+
 
 A React prototype of a multi-step "build your security system" bundle builder, with a live review panel that stays in sync with selections. Built to match the provided Figma design.
 
@@ -22,6 +24,8 @@ A React prototype of a multi-step "build your security system" bundle builder, w
 - **Two-way synced quantity steppers** — updating quantity on a product card or in the review panel updates both, plus the recalculated total.
 - **Persistence** — "Save my system for later" stores the full configuration in `localStorage`. Reloading or returning to the app restores the exact saved state.
 - **Responsive layout** — matches the Figma at desktop widths and reflows to remain usable down to mobile.
+<img width="1686" height="853" alt="image" src="https://github.com/user-attachments/assets/58dee05b-0b43-45d8-85aa-f4d22992f6bb" />
+
 
 ## Project Structure
 
@@ -74,6 +78,7 @@ cd <repo-folder>
 npm install
 npm run dev
 ```
+<img width="935" height="673" alt="image" src="https://github.com/user-attachments/assets/b7c54a64-476f-45fe-95df-1e0cf46b5a14" />
 
 The app will be available at `http://localhost:5173` (Vite default) — adjust if your setup differs.
 
